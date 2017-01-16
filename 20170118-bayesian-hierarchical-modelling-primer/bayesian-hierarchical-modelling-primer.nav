@@ -1,0 +1,61 @@
+\beamer@endinputifotherversion {3.36pt}
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\sectionentry {1}{A primer on Bayes' Theorem}{3}{A primer on Bayes' Theorem}{0}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{The Bayes' Theorem}}\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{The Bayes' Theorem}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\slideentry {1}{1}{2}{4/4}{The Bayes' Theorem}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {1}{1}{3}{5/5}{The Bayes' Theorem}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\slideentry {1}{1}{4}{6/6}{The Bayes' Theorem}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {1}{1}{5}{7/7}{The Bayes' Theorem}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{8}{Why is Bayes' Theorem useful?}}\headcommand {\beamer@subsectionpages {3}{7}}
+\headcommand {\slideentry {1}{2}{1}{8/8}{Why is Bayes' Theorem useful?}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{9}{A few simple examples}}\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {1}{3}{1}{9/9}{A few simple examples}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {1}{3}{2}{10/10}{A few simple examples}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@subsectionentry {0}{1}{4}{11}{Data order invariance}}\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\slideentry {1}{4}{1}{11/11}{Data order invariance}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\sectionentry {2}{Moving to Bayesian Hierarchical Modelling}{12}{Moving to Bayesian Hierarchical Modelling}{0}}
+\headcommand {\beamer@sectionpages {3}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{12}{What does hierarchical/Multilevel Modelling mean?}}\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\slideentry {2}{1}{1}{12/12}{What does hierarchical/Multilevel Modelling mean?}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {2}{1}{2}{13/13}{What does hierarchical/Multilevel Modelling mean?}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{14}{Baseball example}}\headcommand {\beamer@subsectionpages {12}{13}}
+\headcommand {\slideentry {2}{2}{1}{14/14}{Baseball example}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{15}{AdWords example}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {2}{3}{1}{15/15}{AdWords example}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\sectionentry {3}{Stan}{16}{Stan}{0}}
+\headcommand {\beamer@sectionpages {12}{15}}
+\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{16}{A quick introduction to Stan}}\headcommand {\beamer@subsectionpages {16}{15}}
+\headcommand {\slideentry {3}{1}{1}{16/16}{A quick introduction to Stan}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{17}{Working with log probability density}}\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\slideentry {3}{2}{1}{17/17}{Working with log probability density}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{18}{How to write a model in Stan}}\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\slideentry {3}{3}{1}{18/18}{How to write a model in Stan}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@partpages {1}{18}}
+\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\beamer@sectionpages {16}{18}}
+\headcommand {\beamer@documentpages {18}}
+\headcommand {\def \inserttotalframenumber {18}}
