@@ -1,0 +1,232 @@
+\documentclass[11pt]{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm,algpseudocode}
+\author{Gianluca Rossi}
+\title{The Metropolis-Hastings Algorithm}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+%\date{} 
+%\subject{} 
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The algorithm}
+
+\subsection{Introduction}
+
+\begin{frame}
+	\frametitle{Why is it useful?}
+	In statistics and in statistical physics, the Metropolis–Hastings (MH) algorithm is a Markov Chain Monte Carlo (MCMC) method for obtaining a sequence of random samples from a probability distribution for which direct sampling is difficult. This sequence can be used to approximate the distribution or to compute an integral.
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Intuition}
+	The MH algorithm can draw samples from any probability distribution $P(x)$, provided you can compute the value of a target function $f(x)$ that is proportional to the density of $P$. \\~\\
+	The loose requirement that $f(x)$ should be merely proportional to the density, rather than exactly equal to it, makes the MH algorithm particularly useful, because calculating the necessary normalization factor is often extremely difficult in practice.
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Use cases}
+	\begin{itemize}
+		\item Design of engines, rockets, generators, nuclear weapons and reactors
+		\item Plasma physics
+		\item Simulation of thermodynamic systems and transport of light in Computer Graphics
+		\item Computation of partition functions of RNA macro-states and their transition states
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Other use cases more interesting to us}
+	\begin{itemize}
+			\item \dots and the computation of posterior distributions in Bayesian statistics
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Why is it useful in Bayesian inference?}
+	When performing Bayesian inference, we aim to compute and use the full posterior joint distribution over a set of random variables ($\theta$). Unfortunately, this often requires calculating intractable integrals. \\~\\
+	In such cases, we may give up on solving the analytical equations,
+and proceed with sampling techniques based upon Markov Chain Monte Carlo (MCMC) methods, such as MH. When using MCMC methods, we estimate the posterior distribution and the intractable integrals using simulated samples from the posterior distribution.
+\end{frame}
+
+
+\subsection{Technical overview}
+
+
+\begin{frame}
+	\frametitle{How it works}
+	\begin{itemize}
+	\item Generate a sequence of sample values in such a way that, as more sample values are produced, the distribution of values more closely approximates the desired distribution, $P(x)$.
+	\item Sample values are produced iteratively, with the distribution of the next sample being dependent only on the current sample value (Markov Chain).
+	\item At each iteration, the algorithm picks a candidate for the next sample value based on the current sample value, $q(x_{i} | x_{i - 1})$. Then, with some probability, the candidate is either accepted or rejected.
+	\item The probability of acceptance is determined by comparing the values of the function $f(x)$ of the current and candidate sample values with respect to the desired distribution $P(x)$.	
+	\end{itemize}	 
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Pseudo code}
+	\begin{algorithm}[H]
+		\caption{Metropolis-Hastings algorithm}
+		\begin{algorithmic}[1]
+		\small
+		\Procedure{Metropolis}{q}
+		\State $x_{0} \sim q(x)$ \Comment{Find starting point}
+		\For{i = 1, 2, \dots}
+			\State $x_{cand} \sim q(x_{i} | x_{i - 1})$ \Comment{Proposal}
+			\State $\alpha = min \left( 1, \frac{q(x_{i - 1} | x_{cand}) \pi(x_{cand})}{q(x_{cand} | x_{i - 1}) \pi(x_{i - 1})}  \right)$ \Comment{Acceptance probability} \label{acceptance}
+		\State $u \sim Uniform(0, 1)$
+		\If{$u < \alpha$}
+			\State $x_{i} \gets x_{cand}$ \Comment{Accept the proposal}
+		\Else
+			\State $x_{i} \gets x_{i - 1}$ \Comment{Reject the proposal}
+		\EndIf
+		\EndFor
+	\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{The proposal distribution}
+	\begin{itemize}
+	\item In Metropolis-Hastings the proposal distribution is usually symmetric, meaning that $q(x_{i} |x_{i - 1}) = q(x_{i - 1} | x_{i})$
+	\begin{itemize}
+		\item Often Gaussian centred at current position
+		\item The variance of the proposal distribution ($\sigma^{2}$, in case of a Gaussian) directly affects the acceptance rate
+	\end{itemize}
+	\item Asymmetric proposal distributions are possible, i.e. log-normal
+	\item Tuning is required to obtain good performance
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Acceptance function}
+	\begin{itemize}
+	\item If density at the candidate point is higher, move to candidate. If the density at the candidate point is lower, move to candidate point only with probability $\alpha$, see Equation  \eqref{acceptance}
+	\item Balance between:
+	\begin{itemize}
+		\item Visit areas with higher probability under the full joint density, constraint given by $\frac{\pi(x_{cand})}{\pi(x_{i - 1})}$
+		\item Explore the space and avoid getting stuck at one point, constraint given by $\frac{q(x_{i - 1} | x_{cand})}{q(x_{cand} | x_{i - 1})}$
+	\end{itemize}
+	\item Satisfies the condition of \textit{detailed balance}, thus guarantees that the stationary distribution of the MH algorithm is the target posterior
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Convergence}
+	\begin{itemize}
+		\item Convergence can be verified looking at the trace plot
+		\item Exclude \textit{burn-in} (\textit{warm-up})
+		\item Thinning could be required when samples show high auto-correlation
+		\item Usually run multiple chains, in such case convergence can be verified using Potential Scale Reduction Factor, see Brooks, SP. and Gelman, A. (1997)
+		\item Effective sample size is computed as: \texttt{chains * ((iter - warmup) / thin)}
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Statistical properties}
+
+
+\begin{frame}
+	\frametitle{Why does it work?}
+	Two properties must be satisfied:
+	\begin{itemize}
+		\item \textit{Ergodicity}, which means that every state can eventually reach any other state
+		\item \textit{Detailed balance}, if the transition rates between all states are zero when the sample has reached the correct probability distribution
+	\end{itemize}
+\end{frame}
+
+
+\section{Example}
+\subsection{Python implementation}
+
+
+\begin{frame}
+	\frametitle{Python implementation}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{A few considerations}
+\end{frame}
+
+
+\subsection{Univariate normal target distribution}
+
+
+\begin{frame}
+	\frametitle{A toy example}
+\end{frame}
+
+
+\subsection{Multivariate normal target distribution}
+
+
+\begin{frame}
+	\frametitle{Using a more realistic target distribution}
+\end{frame}
+
+
+\subsection{Correlation between two Gaussian distributions}
+
+
+\begin{frame}
+	\frametitle{One final target distribution}
+\end{frame}
+
+
+\section{Applications}
+\subsection{Bayesian inference}
+
+
+\begin{frame}
+	\frametitle{Bayesian inference}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Bayesian inference}
+\end{frame}
+
+
+\subsection{When does it fails?}
+
+
+\begin{frame}
+	\frametitle{What does failure mean?}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Long convergence time}
+\end{frame}
+
+
+\end{document}
